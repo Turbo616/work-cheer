@@ -1,0 +1,38 @@
+name: Build desktop installers
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            target: --mac --arm64 --x64
+          - os: windows-latest
+            target: --win --x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npx electron-builder ${{ matrix.target }} --publish never
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: 上班鼓励器 v1.0.0
+          body: 免费开源。工资与作息仅保存在本机。安装包未购买商业签名证书，macOS 与 Windows 可能提示未知开发者。收入为估算，请以实际工资单为准。
+          files: |
+            dist/*.dmg
+            dist/*.zip
+            dist/*.exe

@@ -1,0 +1,43 @@
+{
+  "name": "work-cheer",
+  "version": "1.0.0",
+  "description": "上班鼓励器 · 看得见的每一份努力",
+  "author": "Turbo616",
+  "license": "MIT",
+  "main": "app/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/*.test.cjs",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "45.2.3",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "com.turbo616.workcheer",
+    "productName": "WorkCheer",
+    "files": [
+      "app/**/*"
+    ],
+    "artifactName": "WorkCheer-${version}-${os}-${arch}.${ext}",
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.productivity",
+      "identity": null
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  }
+}
