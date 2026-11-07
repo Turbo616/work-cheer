@@ -31,3 +31,7 @@ MIT License
 ## 官网部署
 
 编辑 `site/index.html`、`site/site.css` 与 `site/demo.js`，运行 `npm run site:build`，再使用已授权的 Cloudflare 账号运行 `npx wrangler deploy`。不要将访问密钥提交到仓库。
+
+## v1.0.1
+
+桌面及在线试用界面同步官网风格：浅暖背景、绿色进度条、粉彩卡片、深色描边与错位阴影。设置窗口采用同一视觉样式；已有工资和作息设置继续保留。
