@@ -27,11 +27,21 @@ jobs:
       - run: npx electron-builder ${{ matrix.target }} --publish never
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - name: Verify macOS application signatures
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          found=0
+          while IFS= read -r -d '' application; do
+            codesign --verify --deep --strict --verbose=2 "$application"
+            found=$((found + 1))
+          done < <(find dist -maxdepth 2 -name 'WorkCheer.app' -print0)
+          test "$found" -eq 2
       - uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.2' }}
-          name: 上班鼓励器 ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.2' }}
-          body: 免费开源。工资与作息仅保存在本机。安装包未购买商业签名证书，macOS 与 Windows 可能提示未知开发者。收入为估算，请以实际工资单为准。
+          tag_name: ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.3' }}
+          name: 上班鼓励器 ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.3' }}
+          body: 免费开源。工资与作息仅保存在本机。Mac 包已重新进行完整本地签名并通过签名检查，但尚未经过 Apple Developer ID 签名和公证，系统仍可能阻止打开；不保证普通下载后可直接运行。Windows 未购买商业签名证书。收入为估算，请以实际工资单为准。
           files: |
             dist/*.dmg
             dist/*.zip

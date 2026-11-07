@@ -1,6 +1,6 @@
 {
   "name": "work-cheer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "上班鼓励器 · 看得见的每一份努力",
   "author": "Turbo616",
   "license": "MIT",
@@ -28,7 +28,8 @@
         "zip"
       ],
       "category": "public.app-category.productivity",
-      "identity": null
+      "identity": "-",
+      "hardenedRuntime": false
     },
     "win": {
       "target": [
