@@ -29,7 +29,7 @@ jobs:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
       - uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.0
+          tag_name: ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.0' }}
           name: 上班鼓励器 v1.0.0
           body: 免费开源。工资与作息仅保存在本机。安装包未购买商业签名证书，macOS 与 Windows 可能提示未知开发者。收入为估算，请以实际工资单为准。
           files: |

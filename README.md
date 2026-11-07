@@ -2,6 +2,12 @@
 
 免费开源的 Mac / Windows 桌面小工具。实时收入、下班倒计时、工作进度、本月估算、自定义作息和加班时薪、窗口置顶。无需账号，数据只保存在本机，离线使用。
 
+## 官网
+
+https://work-cheer.1184360066yang.workers.dev/
+
+介绍页参考用户指定页面的浅暖背景、绿色按钮、深色描边与错位阴影风格，提供在线试用和三个安装包入口。
+
 ## 下载
 
 从本仓库 Releases 下载：Mac Apple 芯片选择 arm64，Intel 选择 x64；Windows 选择 exe。Mac 打开 dmg 后拖入 Applications，Windows 运行安装程序。
@@ -21,3 +27,7 @@ Node.js 22+。`npm ci`、`npm test`、`npm start`。`npm run dist -- --mac` 或 
 无账户、无分析跟踪、无云端工资上传，应用不加载远程网页。卸载前可清除本机应用数据以删除设置。
 
 MIT License
+
+## 官网部署
+
+编辑 `site/index.html`、`site/site.css` 与 `site/demo.js`，运行 `npm run site:build`，再使用已授权的 Cloudflare 账号运行 `npx wrangler deploy`。不要将访问密钥提交到仓库。
